@@ -6,6 +6,8 @@ const Home = () => {
       <Helmet>
         <title>Home | Vista Vocal</title>
       </Helmet>
+
+      {/* TODO: Slider */}
       This is home
     </>
   );

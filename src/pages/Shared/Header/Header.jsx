@@ -1,5 +1,5 @@
-import {  NavLink } from "react-router-dom";
-
+import {  Link, NavLink } from "react-router-dom";
+import { FaMusic } from 'react-icons/fa';
 const Header = () => {
 
 
@@ -76,7 +76,7 @@ const Header = () => {
            {menuLinks}
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">Vocal Vista</a>
+        <Link to='/'> <span className=" flex items-center justify-center gap-2 text-3xl font-bold" ><FaMusic/> Vocal Vista</span></Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -84,7 +84,7 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Login</a>
+        <Link to='/auth/login' className="btn">Login</Link>
       </div>
     </nav>
   );
