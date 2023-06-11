@@ -1,7 +1,17 @@
 import {  Link, NavLink } from "react-router-dom";
 import { FaMusic } from 'react-icons/fa';
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
 
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        console.log("user logged out");
+      })
+      .catch((error) => console.log(error));
+  };
 
   const menuLinks = (
     <>
@@ -15,39 +25,10 @@ const Header = () => {
       <li>
       <NavLink to="/classes">Classes</NavLink>
       </li>
+  
+      
       </>
-      );
-      {/* {user ? (
-        <>
-        <li>
-        <Link to="/dashboard">Dashboard</Link>
-      </li>
-          <button
-            onClick={handleLogOut}
-            className=" btn btn-ghost uppercase font-extrabold text-xl mx-3 "
-          >
-            {" "}
-            Log Out
-          </button>
-          <div className="avatar">
-            <div className="w-12 h-12 rounded-full">
-              {user.photoURL ? (
-                <img src={user.photoURL} />
-              ) : (
-                <img src="https://static.vecteezy.com/system/resources/previews/001/840/618/original/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg" />
-              )}
-            </div>
-          </div>{" "}
-        </>
-      ) : (
-        <>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-        </>
-      )}
-    </>
-  ); */}
+  );
 
   return (
     <nav className="navbar bg-base-100">
@@ -84,7 +65,30 @@ const Header = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link to='/auth/login' className="btn">Login</Link>
+
+      {user ? (
+        <>
+         
+          <div className="avatar">
+            <div className="w-12 h-12 rounded-full">
+              {user.photoURL ? (
+                <img src={user.photoURL} />
+              ) : (
+                <img src="https://static.vecteezy.com/system/resources/previews/001/840/618/original/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg" />
+              )}
+            </div>
+            <button onClick={handleLogOut} className=" btn ">
+            {" "}
+            Log Out
+          </button>
+          </div>{" "}
+        </>
+      ) : (
+        <>
+            <Link className=" btn" to="/auth/login">Login</Link>
+        
+        </>
+      )}
       </div>
     </nav>
   );

@@ -8,6 +8,7 @@ const Home = () => {
       </Helmet>
 
       {/* TODO: Slider */}
+      
       This is home
     </>
   );
