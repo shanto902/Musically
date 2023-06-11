@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import SocialLoginSection from "../Shared/SocialLoginSection/SocialLoginSection";
 
 const Register = () => {
   const {
@@ -23,13 +24,29 @@ const Register = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("User Profile Updated");
-          reset();
-          Swal.fire({
-            icon: "success",
-            title: "Profile Updated Successfully",
-          });
-          navigate("/");
+          const saveUser = {
+            name: data.name,
+            email: data.email,
+            picture: data.photoURL,
+          };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  icon: "success",
+                  title: "Profile Updated Successfully",
+                });
+                navigate("/");
+              }
+            });
         })
         .catch((error) => console.log(error));
     });
@@ -105,6 +122,7 @@ const Register = () => {
           </div>
         </form>
       </div>
+      <SocialLoginSection />
     </>
   );
 };

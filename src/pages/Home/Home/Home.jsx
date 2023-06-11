@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import PopularClasses from "../PopularClasses/PopularClasses";
+import PopularInstructors from "../PopularInstructors/PopularInstructors";
 
 const Home = () => {
   return (
@@ -9,7 +11,8 @@ const Home = () => {
 
       {/* TODO: Slider */}
       
-      This is home
+      <PopularClasses />
+      <PopularInstructors/>
     </>
   );
 };

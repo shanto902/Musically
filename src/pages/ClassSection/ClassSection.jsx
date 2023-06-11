@@ -6,7 +6,7 @@ const ClassSection = () => {
       <Helmet>
         <title>Classes | Vista Vocal</title>
       </Helmet>
-      This is ClassSection
+     <div className="container"></div>
     </>
   );
 };

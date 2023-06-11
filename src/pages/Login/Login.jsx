@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLoginSection from "../Shared/SocialLoginSection/SocialLoginSection";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -69,6 +70,7 @@ const Login = () => {
           <input className="btn" type="Submit" />
         </div>
       </form>
+      <SocialLoginSection />
     </div>
   );
 };

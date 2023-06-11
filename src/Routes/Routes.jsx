@@ -8,6 +8,7 @@ import ClassSection from "../pages/ClassSection/ClassSection";
 import Auth from "../Layout/Auth";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import Dashboard from "../Layout/Dashboard";
 
   export const router = createBrowserRouter([
     {
@@ -42,5 +43,9 @@ import Register from "../pages/Register/Register";
                 element: <Register />
             }
         ]
+    },
+    {
+      path: 'dashboard',
+      element: <Dashboard />
     }
   ]);
