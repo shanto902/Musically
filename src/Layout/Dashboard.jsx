@@ -5,8 +5,6 @@ import useInstructor from "../hooks/useInstructor";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
-
-  console.log(isInstructor)
   const studentNavOptions = (
     <>
       <li>

@@ -10,13 +10,11 @@ const AllUsers = () => {
   });
 
   const handleManageUser = (user, role) => {
-    console.log(user);
     fetch(`http://localhost:5000/users/${role}/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.modifiedCount) {
           refetch();
           alert(`${user.name} is now ${role}`);

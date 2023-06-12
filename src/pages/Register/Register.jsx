@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import SocialLoginSection from "../Shared/SocialLoginSection/SocialLoginSection";
+import useSecureAxios from "../../hooks/useSecureAxios";
 
 const Register = () => {
   const {
@@ -18,28 +19,24 @@ const Register = () => {
 
   const { createUser, updateUserProfile } = useContext(AuthContext);
 
+  const [secureAxios] = useSecureAxios();
+
   const onSubmit = (data) => {
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      console.log(loggedUser);
+
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
           const saveUser = {
             name: data.name,
             email: data.email,
             picture: data.photoURL,
-            role : 'student'
+            role: "student",
           };
-          fetch("http://localhost:5000/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(saveUser),
-          })
-            .then((res) => res.json())
-            .then((data) => {
-              if (data.insertedId) {
+          secureAxios
+            .post("/users", saveUser)
+            .then((res) => {
+              if (res.data.insertedId) {
                 reset();
                 Swal.fire({
                   icon: "success",
@@ -47,7 +44,8 @@ const Register = () => {
                 });
                 navigate("/");
               }
-            });
+            })
+            .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));
     });

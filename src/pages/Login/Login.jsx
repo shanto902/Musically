@@ -21,7 +21,6 @@ const Login = () => {
       .then((result) => {
         Swal.fire("Success", "User Logged in Successfully", "success");
         const user = result.user;
-        console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;

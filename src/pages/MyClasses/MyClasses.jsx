@@ -27,9 +27,8 @@ const MyClasses = () => {
       availableSeats: data.availableSeats,
       price: data.price,
     };
-    console.log(newData);
     try {
-      await secureAxios.patch(`/classes/${selectedClass._id}`, data);
+      await secureAxios.patch(`/classes/${selectedClass._id}`, newData);
       console.log("Class updated successfully!");
       reset();
       window.my_modal_3.close();
