@@ -17,6 +17,7 @@ const ManageClasses = () => {
 
   const onSubmit = async (data) => {
     handleUpdateFeedback(selectedClass._id, data.feedback);
+    window.my_modal_3.close()
   };
 
   const handleStatus = async (classItem, status) => {
@@ -29,6 +30,7 @@ const ManageClasses = () => {
       if (data.modifiedCount) {
         refetch();
         alert(`${classItem.nameOfClass} is now ${status}`);
+        
       }
     } catch (error) {
       console.error("Failed to update class:", error);
@@ -121,17 +123,14 @@ const ManageClasses = () => {
                       >
                         Deny
                       </button>
+                      <div className={`${thisClass.feedback ? "tooltip  tooltip-bottom ": ""}`} data-tip={`${thisClass.feedback}`}>
                       <button
                         onClick={() => handleModal(thisClass)}
-                        disabled={
-                          thisClass.status === "approve" ||
-                          thisClass.status === "pending" ||
-                          thisClass.feedback
-                        }
                         className="btn btn-outline"
                       >
-                        Send feedback
+                         {thisClass.feedback ? "Feedback Done" : "Send Feedback"}
                       </button>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -139,9 +138,6 @@ const ManageClasses = () => {
           </tbody>
         </table>
       </div>
-      <button className="btn" onClick={() => window.my_modal_3.showModal()}>
-        Open Modal
-      </button>
       <dialog id="my_modal_3" className="modal">
         <form onSubmit={handleSubmit(onSubmit)} className="modal-box">
           <button

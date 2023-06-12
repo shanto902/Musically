@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import useAuthentication from "../../hooks/useAuthentication";
 import { useEffect } from "react";
 import useSecureAxios from "../../hooks/useSecureAxios";
-
-const imageToken = import.meta.env.VITE_imageToken;
+import useImageUploader from "../../hooks/useImageUploader";
 
 const AddClasses = () => {
-  console.log(imageToken)
+  const { uploadedImage, uploading, uploadImage } = useImageUploader();
+
   const [secureAxios] = useSecureAxios();
   const {
     register,
@@ -18,28 +18,43 @@ const AddClasses = () => {
   } = useForm();
   const { user } = useAuthentication();
   const onSubmit = async (data) => {
-    
     try {
-    const newData = { ...data, status: 'pending' };
+      await uploadImage(data.image[0]);
+      console.log("Image uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+
+    try {
+      const newData = {
+        ...data,
+        status: "pending",
+        classImage: uploadedImage,
+        image: undefined, // Remove the 'image' property from the data object
+      };
       await secureAxios.post("/classes", newData);
       console.log("Class added successfully!");
       reset();
+      console.log("Form data:", newData);
     } catch (error) {
       console.error("Failed to add class:", error);
     }
 
+    
+    console.log("Form Image:", uploadedImage);
   };
 
   useEffect(() => {
     setValue("instructorName", user.displayName);
     setValue("instructorEmail", user.email);
   }, [user, setValue]);
+
   return (
     <>
       <Helmet>
         <title>Add Class | Vista Vocal</title>
       </Helmet>
-      <div className=" max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
           <div className="form-control">
             <label className="label">
@@ -52,7 +67,7 @@ const AddClasses = () => {
               {...register("nameOfClass", { required: true })}
             />
             {errors.nameOfClass && (
-              <span className=" text-red-600">This is required.</span>
+              <span className="text-red-600">This is required.</span>
             )}
           </div>
           <div className="form-control">
@@ -60,13 +75,15 @@ const AddClasses = () => {
               <span className="label-text">Class Image</span>
             </label>
             <input
-              type="text"
+              type="file"
               placeholder="Enter PhotoURL of Class"
               className="input input-bordered"
-              {...register("classImage")}
+              {...register("image")}
             />
-            {errors.classImage && (
-              <span className=" text-red-600">This is required.</span>
+            {uploading && <p>Uploading image...</p>}
+            {uploadedImage && <img src={uploadedImage} alt="Uploaded" />}
+            {errors.image && (
+              <span className="text-red-600">This is required.</span>
             )}
           </div>
           <div className="form-control">
@@ -106,7 +123,7 @@ const AddClasses = () => {
               {...register("availableSeats", { required: true })}
             />
             {errors.availableSeats && (
-              <span className=" text-red-600">This is required.</span>
+              <span className="text-red-600">This is required.</span>
             )}
           </div>
           <div className="form-control">
@@ -121,11 +138,11 @@ const AddClasses = () => {
               {...register("price", { required: true })}
             />
             {errors.price && (
-              <span className=" text-red-600">This is required.</span>
+              <span className="text-red-600">This is required.</span>
             )}
           </div>
           <div className="form-control mt-6">
-            <input className="btn" type="Submit" />
+            <input className="btn" type="submit" />
           </div>
         </form>
       </div>

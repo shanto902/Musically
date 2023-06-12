@@ -53,7 +53,20 @@ const Dashboard = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-          {(isAdmin ? adminNavOptions : (isInstructor ? instructorNavOptions : studentNavOptions))}
+          {isAdmin
+            ? adminNavOptions
+            : isInstructor
+            ? instructorNavOptions
+            : studentNavOptions}
+          
+            <div className="divider"></div>
+            <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/Classes">Classes</NavLink>
+      </li>
+         
         </ul>
       </div>
     </div>
