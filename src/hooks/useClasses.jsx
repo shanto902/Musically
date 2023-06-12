@@ -3,12 +3,10 @@ import useSecureAxios from "./useSecureAxios";
 
 const useClasses = () => {
   const [secureAxios] = useSecureAxios();
-  // use axios secure with react query
   const { data: classes = [], isLoading: isClassLoading } = useQuery({
-    queryKey: ['allClasses'],
+    queryKey: ['classes'],
     queryFn: async () => {
       const res = await secureAxios.get(`/classes`);
-      console.log(res.data); // Log the response data
       return res.data;
     }
   });

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -16,21 +16,30 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const onSubmit = (data) => {
+    setIsSubmitting(true);
+
     signIn(data.email, data.password)
       .then((result) => {
+        setIsSubmitting(false);
         Swal.fire("Success", "User Logged in Successfully", "success");
         const user = result.user;
+        navigate(from, { replace: true });
       })
       .catch((error) => {
+        
         const errorCode = error.code;
         const errorMessage = error.message;
         Swal.fire(`Error ${errorCode}`, `${errorMessage}`, "error");
+        setIsSubmitting(false);
       });
-    navigate(from, { replace: true });
   };
+
   return (
-    <div className=" max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
         <div className="form-control">
           <label className="label">
@@ -43,7 +52,7 @@ const Login = () => {
             {...register("email", { required: true })}
           />
           {errors.email && (
-            <span className=" text-red-600">This is required.</span>
+            <span className="text-red-600">This is required.</span>
           )}
         </div>
         <div className="form-control">
@@ -66,7 +75,9 @@ const Login = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <input className="btn" type="Submit" />
+          <button className="btn" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Logging in..." : "Log In"}
+          </button>
         </div>
       </form>
       <SocialLoginSection />

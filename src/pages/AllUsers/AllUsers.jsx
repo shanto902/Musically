@@ -9,17 +9,20 @@ const AllUsers = () => {
     return res.data;
   });
 
-  const handleManageUser = (user, role) => {
-    fetch(`http://localhost:5000/users/${role}/${user._id}`, {
-      method: "PATCH",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
-          refetch();
-          alert(`${user.name} is now ${role}`);
-        }
-      });
+  const handleManageUser = async (user, role) => {
+  
+    try {
+      const response = await secureAxios.patch(`/users/${role}/${user._id}`);
+      const data = response.data;
+  
+      if (data.modifiedCount) {
+        refetch();
+        alert(`${user.name} is now ${role}`);
+      }
+    } catch (error) {
+      console.error("Failed to update user:", error);
+      // Handle error
+    }
   };
   return (
     <div>

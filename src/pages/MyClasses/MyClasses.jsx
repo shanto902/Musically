@@ -89,7 +89,7 @@ const MyClasses = () => {
                   <td>{classItem.price}</td>
                   <td>{classItem.enrolledStudents}</td>
                   <td>
-                    {classItem.status === "approved"
+                    {classItem.status === "approve"
                       ? "Approved"
                       : classItem.status === "denied"
                       ? "Denied"

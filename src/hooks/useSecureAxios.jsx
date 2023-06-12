@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from "react";
-import { AuthContext } from '../providers/AuthProvider';
+
+import useAuthentication from './useAuthentication';
+
 
 
 const secureAxios = axios.create({
@@ -10,7 +11,7 @@ const secureAxios = axios.create({
 });
 
 const useSecureAxios = () => {
-  const { logOut } = useContext(AuthContext); 
+  const {loading, logOut} = useAuthentication();
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -27,12 +28,14 @@ const useSecureAxios = () => {
       async (error) => {
         if (error.response && (error.response.status === 401 || error.response.status === 403)) {
           await logOut();
-          navigate('/auth/login');
+          if(!loading){
+            navigate('/auth/login');
+          }
         }
         return Promise.reject(error);
       }
     );
-  }, [logOut, navigate]);
+  }, [loading, logOut, navigate]);
 
   return [secureAxios];
 };

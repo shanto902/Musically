@@ -4,7 +4,10 @@ import useAuthentication from "../../hooks/useAuthentication";
 import { useEffect } from "react";
 import useSecureAxios from "../../hooks/useSecureAxios";
 
+const imageToken = import.meta.env.VITE_imageToken;
+
 const AddClasses = () => {
+  console.log(imageToken)
   const [secureAxios] = useSecureAxios();
   const {
     register,
