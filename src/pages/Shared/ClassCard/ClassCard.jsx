@@ -2,12 +2,18 @@ import { useNavigate } from 'react-router-dom';
 import useAuthentication from '../../../hooks/useAuthentication';
 import useSecureAxios from '../../../hooks/useSecureAxios';
 import Swal from 'sweetalert2';
+import useUserRole from '../../../hooks/useUserRole';
 
 const ClassCard = ({ classItem }) => {
   const { user } = useAuthentication();
   const [secureAxios] = useSecureAxios();
+  const isStudent = useUserRole(user?.email);
+
   const navigate = useNavigate();
 
+  console.log(isStudent)
+
+  
   const handleBuy = async (classItem) => {
     console.log(classItem);
     if (user && user.email) {
@@ -60,7 +66,7 @@ const ClassCard = ({ classItem }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{classItem.name}</h2>
-        <button className="btn" onClick={() => handleBuy(classItem)}>
+        <button className="btn" disabled={!isStudent || user }  onClick={() => handleBuy(classItem)}>
           Buy
         </button>
         <p>{classItem.instructorName}</p>
