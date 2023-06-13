@@ -1,44 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
 import useAuthentication from './useAuthentication';
 import useSecureAxios from './useSecureAxios';
+import { useQuery } from '@tanstack/react-query';
 
 const useUserRole = (email) => {
-  const [isStudent, setIsStudent] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const { user } = useAuthentication();
   const [secureAxios] = useSecureAxios();
 
-  const {user} = useAuthentication()
+  const fetchUserRole = async () => {
+    const response = await secureAxios.get(`/user/role/${user?.email}`);
+    const { role } = response.data;
+    return role === 'student';
+  };
+
+  const { data: isStudent, isLoading, refetch } = useQuery(['userRole', email], fetchUserRole, {
+    enabled: !!email,
+  });
 
   useEffect(() => {
-    let isMounted = true;
+    refetch();
+  }, [email, refetch]);
 
-    const checkUserRole = async () => {
-      try {
-        const response = await secureAxios.get(`/user/role/${user.email}`);
-        const { role } = response.data;
-        if (isMounted) {
-          setIsStudent(role === 'student');
-          setIsLoading(false);
-        }
-      } catch (error) {
-        console.error('Error checking user role:', error);
-        if (isMounted) {
-          setIsStudent(false);
-          setIsLoading(false);
-        }
-      }
-    };
+  console.log("isLoading",isLoading, "isStudent",isStudent)
 
-    if (email) {
-      checkUserRole();
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [email]);
-
-  return { isStudent, isLoading };
+  return [isStudent, isLoading];
 };
 
 export default useUserRole;

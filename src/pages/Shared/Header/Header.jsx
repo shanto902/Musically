@@ -1,14 +1,18 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink} from "react-router-dom";
 import { FaMusic } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+
 const Header = () => {
+  
   const { user, logOut } = useContext(AuthContext);
+
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         console.log("user logged out");
+        
       })
       .catch((error) => console.log(error));
   };
