@@ -91,7 +91,7 @@ const ManageClasses = () => {
                   <td>
                     <img
                       className="avatar w-24 h-24 rounded-xl"
-                      src={thisClass.picture}
+                      src={thisClass.classImage}
                       alt=""
                     />
                   </td>

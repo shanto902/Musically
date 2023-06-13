@@ -23,7 +23,6 @@ const MyClasses = () => {
   const onSubmit = async (data) => {
     const newData = {
       nameOfClass: data.nameOfClass,
-      classImage: data.classImage,
       availableSeats: data.availableSeats,
       price: data.price,
     };
@@ -81,7 +80,7 @@ const MyClasses = () => {
                   <td>
                     <img
                       className="avatar w-24 h-24 rounded-xl"
-                      src={classItem.classPhotoURL}
+                      src={classItem.classImage}
                       alt=""
                     />
                   </td>
