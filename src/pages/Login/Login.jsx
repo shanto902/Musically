@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import SocialLoginSection from "../Shared/SocialLoginSection/SocialLoginSection";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -30,7 +31,6 @@ const Login = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        
         const errorCode = error.code;
         const errorMessage = error.message;
         Swal.fire(`Error ${errorCode}`, `${errorMessage}`, "error");
@@ -39,6 +39,10 @@ const Login = () => {
   };
 
   return (
+  <>
+  <Helmet>
+        <title>Login | Vista Vocal</title>
+      </Helmet>
     <div className="max-w-7xl mx-auto">
       <form onSubmit={handleSubmit(onSubmit)} className="card-body">
         <div className="form-control">
@@ -81,7 +85,7 @@ const Login = () => {
         </div>
       </form>
       <SocialLoginSection />
-    </div>
+    </div></>
   );
 };
 

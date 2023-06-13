@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import ManageClasses from "../pages/ManageClasses/ManageClasses";
 import AddClasses from "../pages/AddClasses/AddClasses";
 import MyClasses from "../pages/MyClasses/MyClasses";
+import SelectedClasses from "../pages/SelectedClassses/SelectedClasses";
 
   export const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ import MyClasses from "../pages/MyClasses/MyClasses";
         {
           path: 'my-classes',
           element: <MyClasses />
+        },
+        {
+          path: 'selected-class',
+          element: <SelectedClasses />
         }
       ]
     }
