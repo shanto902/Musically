@@ -1,7 +1,7 @@
 import { Link, NavLink} from "react-router-dom";
-import { FaMusic } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import logo from "../../../assets/logo.svg"
 
 const Header = () => {
   
@@ -20,19 +20,37 @@ const Header = () => {
   const menuLinks = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink className={' link hover:!link-hover'} style={
+          ({ isActive }) => ({
+          color: isActive ? '#fff' : '#fff',
+          background: isActive ? 'none' : 'none',
+          textDecoration: isActive ? "underline" : "none"
+    
+        })} to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/instructors">Instructors</NavLink>
+        <NavLink className={' link hover:!link-hover'}
+         to="/instructors"
+        style={({ isActive }) => ({
+          color: isActive ? '#fff' : '#fff',
+          background: isActive ? 'none' : 'none',
+          textDecoration: isActive ? "underline" : "none"
+        })}>Instructors</NavLink>
       </li>
       <li>
-        <NavLink to="/classes">Classes</NavLink>
+        <NavLink className={' link !link-hover'}
+        style={({ isActive }) => ({
+          color: isActive ? '#fff' : '#fff',
+          background: isActive ? 'none' : 'none',
+          textDecoration: isActive ? "underline" : "none"
+        })} to="/classes">Classes</NavLink>
       </li>
     </>
   );
 
   return (
-    <nav className="navbar bg-base-100">
+    <nav className="w-full flex justify-center ">
+      <div className="navbar h-36 bg-transparent z-10 max-w-6xl border-b-white border-b-2 flex items-end text-w">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -60,20 +78,20 @@ const Header = () => {
         </div>
         <Link to="/">
           <span className=" flex items-center justify-center gap-2 text-3xl font-bold">
-            <FaMusic /> Vocal Vista
+            <img className="w-20" src={logo} alt="" />
           </span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{menuLinks}</ul>
+        <ul className="menu menu-horizontal px-1 text-white font-skia">{menuLinks}</ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end gap-4 ">
         {user ? (
           <>
-          <NavLink to='dashboard' className="btn">
+          <NavLink to='dashboard' className="btn bg-white font-skia border-0 text-base normal-case hover:bg-[#474545] hover:text-white rounded-2xl">
           Dashboard</NavLink>
             <div className="avatar">
-              <div className="w-12 h-12 rounded-full">
+              <div className="w-12 h-12 rounded-full drop-shadow-lg bg-white">
                 {user.photoURL ? (
                   <img src={user.photoURL} />
                 ) : (
@@ -81,18 +99,19 @@ const Header = () => {
                 )}
               </div>
             </div>
-            <button onClick={handleLogOut} className=" btn btn-ghost uppercase font-extrabold text-xl mx-3 ">
+            <button onClick={handleLogOut} className=" btn  bg-[#474545] text-white hover:text-black hover:bg-white font-skia border-0 text-base normal-case rounded-2xl ">
             {" "}
             Log Out
           </button>
           </>
         ) : (
           <>
-            <Link className=" btn" to="/auth/login">
+            <Link className=" btn bg-[#474545] border-0 text-white font-skia text-base hover:text-black hover:border-0" to="/auth/login">
               Login
             </Link>
           </>
         )}
+      </div>
       </div>
     </nav>
   );

@@ -4,7 +4,7 @@ import Footer from "../pages/Shared/Footer/Footer";
 
 const Main = () => {
     return (
-        <div>
+        <div className="max-w-[1920px] mx-auto font-skia">
             <Header />
             <Outlet />
             <Footer />

@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Skia";
+        src: url('/font/Skia.woff2') format("woff2"), url("/font/Skia/woff") format("woff");
+    }
+    @font-face {
+        font-family: "Roundhand";
+        src: url('/font/Roundhand-Bold.woff2') format("woff2"), url("/font/Skia/Roundhand-Bold.woff") format("woff");
+    }
+}

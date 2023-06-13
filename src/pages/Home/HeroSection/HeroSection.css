@@ -1,0 +1,11 @@
+.swiper-pagination-bullet {
+    background-color: white !important;
+}
+
+.swiper-pagination-horizontal {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 48px;
+    padding-right: 48px;
+
+}

@@ -15,6 +15,7 @@ import ManageClasses from "../pages/ManageClasses/ManageClasses";
 import AddClasses from "../pages/AddClasses/AddClasses";
 import MyClasses from "../pages/MyClasses/MyClasses";
 import SelectedClasses from "../pages/SelectedClassses/SelectedClasses";
+import Payment from "../pages/Payment/Payment";
 
   export const router = createBrowserRouter([
     {
@@ -47,7 +48,7 @@ import SelectedClasses from "../pages/SelectedClassses/SelectedClasses";
             {
                 path: 'register',
                 element: <Register />
-            }
+            },
         ]
     },
     {
@@ -73,6 +74,10 @@ import SelectedClasses from "../pages/SelectedClassses/SelectedClasses";
         {
           path: 'selected-class',
           element: <SelectedClasses />
+        },
+        {
+          path: 'payment/:id',
+          element: <Payment />
         }
       ]
     }

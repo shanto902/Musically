@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        skia: ["Skia, serif"],
+        roundhand: ["Roundhand, sans"]
+
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
