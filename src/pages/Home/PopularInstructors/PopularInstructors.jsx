@@ -1,8 +1,7 @@
 import useAllInstructors from "../../../hooks/useAllInstructors";
-import ClassCard from "../../Shared/ClassCard/ClassCard";
 import HeaderTitle from "../../Shared/HeaderTitle/HeaderTitle";
-import LogoHeader from "../../Shared/LogoHeader/LogoHeader";
 import backgroundImage from '../../../assets/Bg.svg'
+import InstructorCard from "../../Shared/InstructorCard/InstructorCard";
 
 const PopularInstructors = () => {
 
@@ -17,19 +16,19 @@ const PopularInstructors = () => {
           backgroundSize: "cover",
           backgroundPosition: "center",
 
-          height: "100vh",
-          position: "relative",
+          height: "100%",
+        
         }}
       >
-        <div className=" max-w-6xl mx-auto">
+        <div className="mt-20 max-w-6xl mx-auto">
         <HeaderTitle title={"Popular Instructors"} />
           <div className=" mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
             {!isInstructorLoading &&
               instructors
-                .sort((a, b) => b.enrolled - a.enrolled) // Sort the classes based on enrolled in descending order
+                // Sort the classes based on enrolled in descending order
                 .slice(0, 6)
-                .map((classItem) => (
-                  <ClassCard key={classItem._id} classItem={classItem} />
+                .map((instructor) => (
+                  <InstructorCard key={instructor._id} instructor={instructor} />
                 ))}
           </div>
         </div>

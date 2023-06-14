@@ -7,14 +7,14 @@ const PopularClasses = () => {
   const [classes, isClassLoading] = useClasses();
   console.log(classes);
   return (
-    <div className="w-full"
+    <div className="w-full absolute"
     style={{
       backgroundImage:
         `url('${backgroundImage}')`,
       backgroundSize: "cover",
       backgroundPosition: "center",
      
-      height: "100vh",
+      height: "100%",
       position: "relative",
     }}>
       <div className=" max-w-6xl mx-auto">
