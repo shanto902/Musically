@@ -3,7 +3,7 @@ import useSelectedClass from "../../hooks/useSelectedClass";
 
 const SelectedClasses = () => {
 
-    const [selectedClass , refetch] = useSelectedClass()
+    const [selectedClass ] = useSelectedClass()
     console.log(selectedClass)
     const navigate = useNavigate();
 

@@ -14,8 +14,10 @@ import PrivateRoute from "./PrivateRoute";
 import ManageClasses from "../pages/ManageClasses/ManageClasses";
 import AddClasses from "../pages/AddClasses/AddClasses";
 import MyClasses from "../pages/MyClasses/MyClasses";
-import SelectedClasses from "../pages/SelectedClassses/SelectedClasses";
-import Payment from "../pages/Payment/Payment";
+import SelectedClasses from "../pages/SelectedClasses/SelectedClasses";
+
+import Payment from "../pages/PaymentForm/Payment";
+
 
   export const router = createBrowserRouter([
     {
@@ -77,7 +79,7 @@ import Payment from "../pages/Payment/Payment";
         },
         {
           path: 'payment/:id',
-          element: <Payment />
+          element: <Payment/>
         }
       ]
     }

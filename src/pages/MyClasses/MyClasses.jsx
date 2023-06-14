@@ -23,8 +23,8 @@ const MyClasses = () => {
   const onSubmit = async (data) => {
     const newData = {
       nameOfClass: data.nameOfClass,
-      availableSeats: data.availableSeats,
-      price: data.price,
+      availableSeats: parseInt(data.availableSeats),
+      price: parseFloat(data.price),
     };
     try {
       await secureAxios.patch(`/classes/${selectedClass._id}`, newData);

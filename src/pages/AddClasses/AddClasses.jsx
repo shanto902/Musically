@@ -16,7 +16,6 @@ const AddClasses = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
     setValue,
     watch,
@@ -24,13 +23,17 @@ const AddClasses = () => {
   const { user } = useAuthentication();
 
   const onSubmit = async (data) => {
-    // Handle form submission, excluding the image
-    const { image, ...newData } = data;
+
     const updatedData = {
-      ...newData,
+      ...data,
+      availableSeats: parseInt(data.availableSeats),
+      price: parseFloat(data.price),
+      enrolled: 0,
       status: "pending",
       classImage: uploadedImage,
-    };
+    };  
+
+  
 
     try {
       await secureAxios.post("/classes", updatedData);
@@ -101,7 +104,7 @@ const AddClasses = () => {
             <input
               disabled
               defaultValue={user.email}
-              type="text"
+              type="email"
               placeholder="instructorEmail"
               className="input input-bordered"
               {...register("instructorEmail")}

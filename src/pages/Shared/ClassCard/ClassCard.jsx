@@ -68,9 +68,16 @@ const ClassCard = ({ classItem }) => {
         });
       }
     } catch (error) {
-      // Handle the error if needed
-      console.error("Failed to enroll in class:", error);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Already selected this class",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     }
+      
+  
   };
 
   return (
@@ -105,7 +112,7 @@ const ClassCard = ({ classItem }) => {
             Available Seats: {classItem.availableSeats}
           </p>
           <p className={`text-center ${hover && isStudent ? 'hidden' : ''}`}>
-            Price: $ {classItem.availableSeats}
+            Price: $ {classItem.price}
           </p>
          
         </div>
