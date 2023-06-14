@@ -8,11 +8,14 @@ import SocialLoginSection from "../Shared/SocialLoginSection/SocialLoginSection"
 import useSecureAxios from "../../hooks/useSecureAxios";
 import backgroundImage from "../../assets/Bg.svg";
 import wave from "../../assets/waveFull.png";
+import LogoHeader from "../Shared/LogoHeader/LogoHeader";
+
 const Register = () => {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -51,101 +54,147 @@ const Register = () => {
         .catch((error) => console.log(error));
     });
   };
+
   return (
     <>
       <Helmet>
         <title>Register | Vista Vocal</title>
       </Helmet>
-       <div
-        className=" fixed bottom-0 -z-20 left-0 w-full h-screen"
+      <div
+        className="fixed bottom-0 -z-20 left-0 w-full h-screen"
         style={{
           backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      >
-        </div>
+      ></div>
 
-        <div
-          className="fixed bottom-0 -z-10 left-0 w-full h-screen"
-          style={{
-            backgroundImage: `url('${wave}')`,
-            backgroundSize: "contain",
-            backgroundPosition: "center bottom",
-            backgroundRepeat: "no-repeat",
-            height: "100vh",
-            position: "",
-          }}
+      <div
+        className="fixed bottom-0 -z-10 left-0 w-full h-screen"
+        style={{
+          backgroundImage: `url('${wave}')`,
+          backgroundSize: "contain",
+          backgroundPosition: "center bottom",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
+          position: "",
+        }}
+      ></div>
+
+      <div className="max-w-7xl z-30 mx-auto">
+        <LogoHeader />
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="z-40 card-body mt-10 bg-white rounded-3xl drop-shadow-lg max-w-xl mx-auto stroke border"
         >
-          </div>
-      <div className=" max-w-7xl z-30 mx-auto">
-        <form onSubmit={handleSubmit(onSubmit)} className="z-40 card-body">
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
             <input
               type="text"
-              placeholder="name"
+              placeholder="Name"
               className="input input-bordered"
               {...register("name", { required: true })}
             />
             {errors.name && (
-              <span className=" text-red-600">This is required.</span>
+              <span className="text-red-600">This is required.</span>
             )}
           </div>
+
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">PhotoURL</span>
-            </label>
             <input
               type="text"
+              placeholder="Email"
+              className="input input-bordered"
+              {...register("email", { required: true })}
+            />
+            {errors.email && (
+              <span className="text-red-600">This is required.</span>
+            )}
+          </div>
+
+          <div className="form-control">
+            <input
+              type="url"
               placeholder="PhotoURL"
               className="input input-bordered"
               {...register("photoURL", { required: true })}
             />
             {errors.photoURL && (
-              <span className=" text-red-600">This is required.</span>
+              <span className="text-red-600">This is required.</span>
             )}
           </div>
+
           <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="text"
-              placeholder="email"
-              className="input input-bordered"
-              {...register("email", { required: true })}
-            />
-            {errors.email && (
-              <span className=" text-red-600">This is required.</span>
-            )}
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
             <input
               type="password"
-              placeholder="password"
+              placeholder="Password"
               className="input input-bordered"
-              {...register("password", { required: true })}
+              {...register("password", {
+                required: true,
+                minLength: 6,
+                maxLength: 30,
+                pattern: /(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9])(?=.*[a-z])/,
+              })}
             />
-            {/* TODO: ADD PATTERN  */}
-            <label className="label">
-              <Link to="/auth/login" className="label-text-alt link link-hover">
-                Already Have an Account?
-              </Link>
-            </label>
+            {errors.password?.type === "required" && (
+              <span className="text-red-600 mt-2">Password is required</span>
+            )}
+
+            {errors.password?.type === "minLength" && (
+              <span className="text-red-600 mt-2">Minimum 6 digits</span>
+            )}
+
+            {errors.password?.type === "maxLength" && (
+              <span className="text-red-600 mt-2">Maximum 30 digits</span>
+            )}
+
+            {errors.password?.type === "pattern" && (
+              <span className="text-red-600 mt-2">Password is too easy</span>
+            )}
           </div>
-          <div className="form-control mt-6">
-            <input className="btn" type="Submit" />
+
+          <div className="form-control">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              className="input input-bordered"
+              {...register("confirmPassword", {
+                required: true,
+                validate: (value) => value === watch("password"),
+              })}
+            />
+            {errors.confirmPassword?.type === "required" && (
+              <span className="text-red-600 mt-2">
+                Confirm Password is required
+              </span>
+            )}
+
+            {errors.confirmPassword?.type === "validate" && (
+              <span className="text-red-600 mt-2">Passwords do not match</span>
+            )}
           </div>
+
+          <div className="mx-auto mt-6">
+            <button
+              className="bg-gradient-to-r from-[#006FD5] via-[#32439B] to-[#19194E] shadow-md rounded-lg text-white px-14 py-3"
+              type="submit"
+            >
+              Register
+            </button>
+          </div>
+
+          <SocialLoginSection />
+
+          <label className="flex justify-center gap-1">
+            Already Have an Account?
+            <Link
+              to="/auth/login"
+              className="link underline hover:text-blue-700 link-hover font-bold"
+            >
+              Login
+            </Link>
+          </label>
         </form>
-        </div>
-       
-      <SocialLoginSection />
+      </div>
     </>
   );
 };

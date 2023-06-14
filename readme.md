@@ -1,1 +1,1 @@
-# Vista Vocal Summer Camp
+# Musically Summer Camp 

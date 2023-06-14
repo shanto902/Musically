@@ -17,20 +17,17 @@ const ManageClasses = () => {
 
   const onSubmit = async (data) => {
     handleUpdateFeedback(selectedClass._id, data.feedback);
-    window.my_modal_3.close()
+    window.my_modal_3.close();
   };
 
   const handleStatus = async (classItem, status) => {
     try {
-      const response = await secureAxios.patch(
-        `/classes/${status}/${classItem._id}`
-      );
+      const response = await secureAxios.patch(`/classes/${status}/${classItem._id}`);
       const data = response.data;
 
       if (data.modifiedCount) {
         refetch();
         alert(`${classItem.nameOfClass} is now ${status}`);
-        
       }
     } catch (error) {
       console.error("Failed to update class:", error);
@@ -67,78 +64,93 @@ const ManageClasses = () => {
 
   return (
     <div>
-      <h3>Total Users: {allClasses.length}</h3>
+      <h3 className="text-center text-xl my-4">Total Users: {allClasses.length}</h3>
       <div className="overflow-x-auto">
-        <table className="table table-zebra">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Class Image</th>
-              <th>Class Name</th>
-              <th>Instructor Name</th>
-              <th>Instructor email</th>
-              <th>Available Seats</th>
-              <th>Price</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {!isClassLoading &&
-              allClasses.map((thisClass, index) => (
-                <tr key={thisClass._id}>
-                  <th>{index + 1}</th>
-                  <td>
-                    <img
-                      className="avatar w-24 h-24 rounded-xl"
-                      src={thisClass.classImage}
-                      alt=""
-                    />
-                  </td>
-                  <td>{thisClass.nameOfClass}</td>
-                  <td>{thisClass.instructorName}</td>
-                  <td>{thisClass.instructorEmail}</td>
-                  <td>{thisClass.availableSeats}</td>
-                  <td>{thisClass.price}</td>
-                  <td>
-                    {thisClass.status === "approve"
-                      ? "Approved"
-                      : thisClass.status === "deny"
-                      ? "Denied"
-                      : "Pending"}
-                  </td>
-                  <td>
-                    <div className="flex flex-col gap-2">
-                      <button
-                        onClick={() => handleStatus(thisClass, "approve")}
-                        disabled={thisClass.status === "approve"}
-                        className="btn btn-outline"
-                      >
-                        Approve
-                      </button>
-                      <button
-                        onClick={() => handleStatus(thisClass, "deny")}
-                        disabled={thisClass.status === "deny"}
-                        className="btn btn-outline"
-                      >
-                        Deny
-                      </button>
-                      <div className={`${thisClass.feedback ? "tooltip  tooltip-bottom ": ""}`} data-tip={`${thisClass.feedback}`}>
-                      <button
-                        onClick={() => handleModal(thisClass)}
-                        className="btn btn-outline"
-                      >
-                         {thisClass.feedback ? "Feedback Done" : "Send Feedback"}
-                      </button>
+        <div className="container mx-auto">
+          <table className="table table-zebra">
+            <thead>
+              <tr>
+                <th className="hidden md:table-cell">#</th>
+                <th>Class Image</th>
+                <th>Class Name</th>
+                <th className="hidden md:table-cell">Instructor Name</th>
+                <th className="hidden md:table-cell">Instructor email</th>
+                <th className="hidden md:table-cell">Available Seats</th>
+                <th className="hidden sm:table-cell">Price</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {!isClassLoading &&
+                allClasses.map((thisClass, index) => (
+                  <tr key={thisClass._id}>
+                    <td className="hidden md:table-cell">{index + 1}</td>
+                    <td>
+                      <img
+                        className="avatar w-24 h-24 rounded-xl"
+                        src={thisClass.classImage}
+                        alt=""
+                      />
+                    </td>
+                    <td>{thisClass.nameOfClass}</td>
+                    <td className="hidden md:table-cell">
+                      {thisClass.instructorName}
+                    </td>
+                    <td className="hidden md:table-cell">
+                      {thisClass.instructorEmail}
+                    </td>
+                    <td className="hidden md:table-cell">
+                      {thisClass.availableSeats}
+                    </td>
+                    <td className="hidden sm:table-cell">
+                      {thisClass.price}
+                    </td>
+                    <td>
+                      {thisClass.status === "approve"
+                        ? "Approved"
+                        : thisClass.status === "deny"
+                        ? "Denied"
+                        : "Pending"}
+                    </td>
+                    <td>
+                      <div className="flex flex-col gap-2">
+                        <button
+                          onClick={() => handleStatus(thisClass, "approve")}
+                          disabled={thisClass.status === "approve"}
+                          className="btn btn-outline mr-2 md:mr-0"
+                        >
+                          Approve
+                        </button>
+                        <button
+                          onClick={() => handleStatus(thisClass, "deny")}
+                          disabled={thisClass.status === "deny"}
+                          className="btn btn-outline"
+                        >
+                          Deny
+                        </button>
+                        <div
+                          className={`${thisClass.feedback ? "tooltip  tooltip-bottom " : ""
+                            }`}
+                          data-tip={`${thisClass.feedback}`}
+                        >
+                          <button
+  onClick={() => handleModal(thisClass)}
+  disabled={thisClass.status === "approve" || thisClass.status === "pending"}
+  className="btn btn-outline"
+>
+  {thisClass.feedback ? "Feedback Done" : "Send Feedback"}
+</button>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <dialog id="my_modal_3" className="modal">
+      <dialog id="my_modal_3" className="modal mx-auto md:w-1/2">
         <form onSubmit={handleSubmit(onSubmit)} className="modal-box">
           <button
             type="button"

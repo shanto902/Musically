@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
-
+import { GiHamburgerMenu } from "react-icons/gi";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
@@ -41,13 +41,13 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
+      <div className="drawer-content mt-16">
         <Outlet />
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary absolute top-3 left-3 drawer-button lg:hidden"
+          className="btn btn-outline absolute top-3 left-3 drawer-button lg:hidden"
         >
-          Open drawer
+          <GiHamburgerMenu/>
         </label>
       </div>
       <div className="drawer-side">

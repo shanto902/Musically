@@ -19,7 +19,7 @@ const SocialLoginSection = () => {
         picture: loggedUser.photoURL,
         role: "student",
       };
-      fetch("http://localhost:5000/users", {
+      fetch("https://musically-three.vercel.app/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

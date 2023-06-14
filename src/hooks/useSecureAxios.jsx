@@ -7,7 +7,7 @@ import useAuthentication from './useAuthentication';
 
 
 const secureAxios = axios.create({
-  baseURL: 'http://localhost:5000', 
+  baseURL: 'https://musically-three.vercel.app', 
 });
 
 const useSecureAxios = () => {
