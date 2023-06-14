@@ -22,7 +22,7 @@ const PopularInstructors = () => {
       >
         <div className="mt-20 max-w-6xl mx-auto">
         <HeaderTitle title={"Popular Instructors"} />
-          <div className=" mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 place-items-center">
             {!isInstructorLoading &&
               instructors
                 // Sort the classes based on enrolled in descending order

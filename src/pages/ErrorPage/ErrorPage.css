@@ -1,0 +1,39 @@
+
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .not-found-title {
+    font-size: 8rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .not-found-subtitle {
+    font-size: 2rem;
+    margin-top: 0.5rem;
+  }
+  
+  .not-found-description {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .not-found-image {
+    width: 300px;
+    margin-top: 2rem;
+  }
+  
+  .not-found-link {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #007bff; 
+  }
+  

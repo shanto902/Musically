@@ -2,16 +2,18 @@ import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { BiBookAlt, BiChalkboard, BiGroup, BiHomeAlt, BiClipboard } from "react-icons/bi";
+import { SiGoogleclassroom } from "react-icons/si";
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const studentNavOptions = (
     <>
       <li>
-        <NavLink to="/dashboard/selected-class">My Selected Classes</NavLink>
+        <NavLink to="/dashboard/selected-class"> <BiBookAlt/> My Selected Classes</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/enrolled-classes">My Enrolled Classes</NavLink>
+        <NavLink to="/dashboard/enrolled-classes"><SiGoogleclassroom/> My Enrolled Classes</NavLink>
       </li>
     </>
   );
@@ -30,10 +32,10 @@ const Dashboard = () => {
   const adminNavOptions = (
     <>
       <li>
-        <NavLink to="/dashboard/manage-classes">Manage Classes</NavLink>
+        <NavLink to="/dashboard/manage-classes"><BiChalkboard/> Manage Classes</NavLink>
       </li>
       <li>
-        <NavLink to="/dashboard/all-users">Manage Users</NavLink>
+        <NavLink to="/dashboard/all-users"> <BiGroup /> Manage Users</NavLink>
       </li>
     </>
   );
@@ -61,10 +63,10 @@ const Dashboard = () => {
           
             <div className="divider"></div>
             <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/"><BiHomeAlt/> Home</NavLink>
       </li>
       <li>
-        <NavLink to="/Classes">Classes</NavLink>
+        <NavLink to="/Classes"> <BiClipboard /> Classes</NavLink>
       </li>
          
         </ul>

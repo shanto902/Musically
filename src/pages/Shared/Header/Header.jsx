@@ -53,13 +53,13 @@ const Header = () => {
       <div className="navbar h-36 bg-transparent z-10 max-w-6xl border-b-white border-b-2 flex items-end text-w">
       <div className="navbar-start">
         <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden my-8 mr-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-12 w-12"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              stroke="#fff"
             >
               <path
                 strokeLinecap="round"
@@ -71,7 +71,7 @@ const Header = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-[#474545] rounded-box w-52"
           >
             {menuLinks}
           </ul>
@@ -85,7 +85,7 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 text-white font-skia">{menuLinks}</ul>
       </div>
-      <div className="navbar-end gap-4 ">
+      <div className="navbar-end gap-5 lg:py-2 md:py-4 py-8 ">
         {user ? (
           <>
           <NavLink to='dashboard' className="btn bg-white font-skia border-0 text-base normal-case hover:bg-[#474545] hover:text-white rounded-2xl">

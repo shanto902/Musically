@@ -24,7 +24,7 @@ const Instructors = () => {
       position: "relative",
     }}>
          <div className=" max-w-6xl mx-auto">
-         <div className=" mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10">
+         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 gap-y-10 place-items-center">
         {!isInstructorLoading &&
           instructors
             .map((instructor) => (

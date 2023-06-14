@@ -17,6 +17,8 @@ import MyClasses from "../pages/MyClasses/MyClasses";
 import SelectedClasses from "../pages/SelectedClasses/SelectedClasses";
 
 import Payment from "../pages/PaymentForm/Payment";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import EnrolledClass from "../pages/EnrolledClass/EnrolledClass";
 
 
   export const router = createBrowserRouter([
@@ -78,9 +80,16 @@ import Payment from "../pages/PaymentForm/Payment";
           element: <SelectedClasses />
         },
         {
+          path: 'enrolled-classes',
+          element: <EnrolledClass />
+        },
+        {
           path: 'payment/:id',
           element: <Payment/>
         }
       ]
+    }, {
+      path: '*',
+      element: <ErrorPage /> // Replace with your 404 page component
     }
   ]);
