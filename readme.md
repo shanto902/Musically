@@ -1,7 +1,7 @@
-### Musically Summer Camp School
+# Musically Summer Camp School
 Welcome to Musically Summer Camp School! This is an online platform where students can buy music courses, instructors can add and remove classes, and there is an admin role for managing users and changing user roles. The live link to the application is available at https://vocal-vista.web.app.
 
-### Technologies Used
+## Technologies Used
 TanStack (React, TypeScript)
 React Router
 Firebase Authentication
@@ -16,7 +16,7 @@ Instructor Management: Instructors have the ability to add new classes to the pl
 
 Admin Role: The admin role has access to manage users and change user roles. Admins can view and update user information, including their roles within the system.
 
-### Getting Started
+## Getting Started
 To run the Musically Summer Camp School application locally, follow these steps:
 
 Clone the repository: git clone <repository-url>
@@ -31,8 +31,8 @@ The application uses Tailwind CSS and Daisy UI for styling. Feel free to customi
 
 The project is built using the TanStack, which combines React, TypeScript, and other modern technologies. Familiarity with these technologies will be helpful for development and customization.
 
-# Contributions
+### Contributions
 Contributions to the Musically Summer Camp School project are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request. Your contributions will be greatly appreciated.
 
-# License
+### License
 The Musically Summer Camp School project is licensed under the MIT License. Feel free to use, modify, and distribute the code as per the terms of the license.
