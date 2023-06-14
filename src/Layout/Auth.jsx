@@ -3,7 +3,9 @@ import { Outlet } from "react-router-dom";
 
 const Auth = () => {
     return (
-       <Outlet/>
+      <div className=" font-skia">
+         <Outlet/>
+      </div>
     );
 };
 

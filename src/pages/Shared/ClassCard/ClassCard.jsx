@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useUserRole from "../../../hooks/useUserRole";
 import masking from "../../../assets/Rectangle.svg";
 import wave from "../../../assets/wave.png";
+import redMasking from "../../../assets/red-rec.svg";
 import { useState } from "react";
 
 const ClassCard = ({ classItem }) => {
@@ -76,8 +77,6 @@ const ClassCard = ({ classItem }) => {
         timer: 1500,
       });
     }
-      
-  
   };
 
   return (
@@ -88,54 +87,95 @@ const ClassCard = ({ classItem }) => {
         onMouseLeave={() => setHover(false)}
       >
         <div
-          className="absolute top-0 left-0 w-[99%] h-[225px] rounded-3xl ml-[1.5px]"
+          className="absolute bg-white top-0 left-0 w-[99%] h-[225px] rounded-3xl ml-[1.5px]"
           style={{
-            backgroundImage: `url('https://i.ibb.co/Cbts4JW/pexels-karolina-grabowska-5902913.png')`,
+            backgroundImage: `url('${classItem.classImage}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         ></div>
-        <img className="self-end z-10" src={masking} alt="" />
+        <img
+          className="self-end z-10 rounded-b-[30px]"
+          src={classItem.availableSeats === 0 ? redMasking : masking}
+          alt=""
+        />
+
         <img
           className="absolute self-end z-20 rounded-b-[30px]"
           src={wave}
           alt=""
         />
-        <div className="absolute z-30 top-1/2 left-0 w-full">
-          <h3 className="text-center font-skia font-thin text-2xl">
+        <div className="absolute z-30 top-[48%] left-0 w-full">
+          <h3
+            className={`text-center font-skia font-thin text-2xl ${
+              classItem.availableSeats === 0 ? "text-white" : ""
+            }`}
+          >
             {classItem.nameOfClass}
           </h3>
-          <p className={`text-center ${hover && isStudent ? 'hidden' : ''}`}>
+          <p
+            className={`text-center ${hover && isStudent ? "hidden" : ""} ${
+              classItem.availableSeats === 0 ? "text-white" : ""
+            }`}
+          >
             Instructor Name: {classItem.instructorName}
           </p>
-          <p className={`text-center ${hover && isStudent ? 'hidden' : ''}`}>
+          <p
+            className={`text-center ${hover && isStudent ? "hidden" : ""} ${
+              classItem.availableSeats === 0 ? "text-white" : ""
+            }`}
+          >
             Available Seats: {classItem.availableSeats}
           </p>
-          <p className={`text-center ${hover && isStudent ? 'hidden' : ''}`}>
+          <p
+            className={`text-center ${hover && isStudent ? "hidden" : ""} ${
+              classItem.availableSeats === 0 ? "text-white" : ""
+            }`}
+          >
             Price: $ {classItem.price}
           </p>
-         
         </div>
-      
 
         {!isLoading && user ? (
           isStudent ? (
-            <div className={`absolute w-full bottom-28 flex justify-center z-30 py-2 px-4 ${hover ? '' : 'hidden'}`}>
-            <button
-              className={`absolute px-7  bg-[#C03C6C] text-white hover:text-black p-2 rounded-xl drop-shadow-lg hover:bg-gray-200 transition duration-300 ease-in-out"${!hover ? 'hidden' : ''}`}
-              disabled={isLoading}
-              onClick={() => handleBuy(classItem)}
+            <div
+              className={`absolute w-full bottom-36 flex justify-center z-30 py-2 px-4 ${
+                hover ? "" : "hidden"
+              }`}
             >
-              {isLoading ? "Loading..." : "Buy"}
-            </button>
+              <button
+                className={`absolute px-7 ${classItem.availableSeats === 0 ? "text-white" : "bg-[#C03C6C] text-white hover:text-black p-2 rounded-xl drop-shadow-lg hover:bg-gray-200"} transition duration-300 ease-in-out ${
+                  !hover ? "hidden" : ""
+                }`}
+                disabled={isLoading || classItem.availableSeats === 0}
+                onClick={() => handleBuy(classItem)}
+              >
+                {isLoading
+                  ? "Loading..."
+                  : classItem.availableSeats === 0
+                  ? "Seat Full"
+                  : "Buy"}
+              </button>
             </div>
           ) : (
-            <p className={` m-3 badge badge-error absolute text-center ${!hover || isStudent ? 'hidden' : ''}`}>
-            Only Students can enroll in this class
-          </p>
+            <p
+              className={` m-3 badge badge-error absolute text-center text-white ${
+                !hover || isStudent || classItem.availableSeats === 0
+                  ? "hidden"
+                  : ""
+              }`}
+            >
+              {classItem.availableSeats === 0
+                ? `Seat Full`
+                : `Only Students can enroll in this class`}
+            </p>
           )
         ) : (
-          <div className={`absolute w-full bottom-28 flex justify-center z-30 py-2 px-4 ${hover ? '' : 'hidden'}`}>
+          <div
+            className={`absolute w-full bottom-28 flex justify-center z-30 py-2 px-4 ${
+              hover ? "" : "hidden"
+            }`}
+          >
             <button
               className="bg-[#C03C6C] text-white hover:text-black p-2 rounded-xl drop-shadow-lg hover:bg-gray-200 transition duration-300 ease-in-out"
               onClick={() => navigate("/auth/login")}

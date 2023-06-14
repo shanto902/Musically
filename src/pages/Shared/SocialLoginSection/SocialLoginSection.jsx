@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { FcGoogle } from "react-icons/fc";
 const SocialLoginSection = () => {
   const { googleSignIn } = useContext(AuthContext);
 
@@ -17,7 +17,7 @@ const SocialLoginSection = () => {
         name: loggedUser.displayName,
         email: loggedUser.email,
         picture: loggedUser.photoURL,
-        role: 'student'
+        role: "student",
       };
       fetch("http://localhost:5000/users", {
         method: "POST",
@@ -27,15 +27,21 @@ const SocialLoginSection = () => {
         body: JSON.stringify(saveUser),
       })
         .then((res) => res.json())
-        .then(() => {       
-            navigate(from, { replace: true });        
-        })
-    })
+        .then(() => {
+          navigate(from, { replace: true });
+        });
+    });
   };
 
   return (
-    <div>
-      <button onClick={handleGoogleSignIn}>Google login</button>
+    <div className="  flex flex-col justify-center items-center gap-3 my-3">
+      <p className="">Or, Login With</p>
+      <button
+        onClick={handleGoogleSignIn}
+        className="btn btn-circle btn-outline"
+      >
+        <FcGoogle className=" w-8 h-8" />
+      </button> 
     </div>
   );
 };

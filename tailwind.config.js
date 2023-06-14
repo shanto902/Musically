@@ -6,6 +6,7 @@ export default {
   ],
   theme: {
     extend: {
+      
       fontFamily: {
         skia: ["Skia, serif"],
         roundhand: ["Roundhand, sans"]

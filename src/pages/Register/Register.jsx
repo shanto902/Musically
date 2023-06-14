@@ -6,7 +6,8 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import SocialLoginSection from "../Shared/SocialLoginSection/SocialLoginSection";
 import useSecureAxios from "../../hooks/useSecureAxios";
-
+import backgroundImage from "../../assets/Bg.svg";
+import wave from "../../assets/waveFull.png";
 const Register = () => {
   const {
     register,
@@ -55,8 +56,30 @@ const Register = () => {
       <Helmet>
         <title>Register | Vista Vocal</title>
       </Helmet>
-      <div className=" max-w-7xl mx-auto">
-        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+       <div
+        className=" fixed bottom-0 -z-20 left-0 w-full h-screen"
+        style={{
+          backgroundImage: `url('${backgroundImage}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        </div>
+
+        <div
+          className="fixed bottom-0 -z-10 left-0 w-full h-screen"
+          style={{
+            backgroundImage: `url('${wave}')`,
+            backgroundSize: "contain",
+            backgroundPosition: "center bottom",
+            backgroundRepeat: "no-repeat",
+            height: "100vh",
+            position: "",
+          }}
+        >
+          </div>
+      <div className=" max-w-7xl z-30 mx-auto">
+        <form onSubmit={handleSubmit(onSubmit)} className="z-40 card-body">
           <div className="form-control">
             <label className="label">
               <span className="label-text">Name</span>
@@ -120,7 +143,8 @@ const Register = () => {
             <input className="btn" type="Submit" />
           </div>
         </form>
-      </div>
+        </div>
+       
       <SocialLoginSection />
     </>
   );
