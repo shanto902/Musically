@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <Helmet>
-        <title>Home | Vista Vocal</title>
+        <title>Home | Musically </title>
       </Helmet>
      
       <HeroSection />

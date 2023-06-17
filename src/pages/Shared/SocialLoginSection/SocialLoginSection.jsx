@@ -11,6 +11,7 @@ const SocialLoginSection = () => {
   const from = location.state?.from?.pathname || "/";
 
   const handleGoogleSignIn = () => {
+
     googleSignIn().then((result) => {
       const loggedUser = result.user;
       const saveUser = {
@@ -19,7 +20,7 @@ const SocialLoginSection = () => {
         picture: loggedUser.photoURL,
         role: "student",
       };
-      fetch("https://musically-three.vercel.app/users", {
+       fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,13 +35,13 @@ const SocialLoginSection = () => {
   };
 
   return (
-    <div className="  flex flex-col justify-center items-center gap-3 my-3">
-      <p className="">Or, Login With</p>
+    <div className="  flex flex-col justify-center items-center gap-2">
+      <p className="text-xs">Or, Login With</p>
       <button
         onClick={handleGoogleSignIn}
-        className="btn btn-circle btn-outline"
+        className="btn btn-circle btn-sm btn-outline "
       >
-        <FcGoogle className=" w-8 h-8" />
+        <FcGoogle className=" w-4 h-4" />
       </button> 
     </div>
   );

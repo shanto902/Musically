@@ -5,7 +5,7 @@ import backgroundImage from '../../../assets/Bg.svg'
 
 const PopularClasses = () => {
   const [classes, isClassLoading] = useClasses();
-  console.log(classes);
+  
   return (
     <div className="w-full absolute"
     style={{

@@ -9,7 +9,7 @@ const ClassSection = () => {
   return (
     <>
       <Helmet>
-        <title>Classes | Vista Vocal</title>
+        <title>Classes | Musically</title>
       </Helmet>
       <Banner url={'https://i.ibb.co/qgKjxBT/classroom.jpg'}  title={"Welcome to Our Class Section"}/>
       <div className="w-full absolute"

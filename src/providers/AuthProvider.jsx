@@ -14,9 +14,10 @@ const AuthProvider = ({ children }) => {
 
   const googleProvider = new GoogleAuthProvider()
 
+ 
   const createUser = (email, password) => {
     setLoading(true)
-    return createUserWithEmailAndPassword ( auth, email, password)
+    return createUserWithEmailAndPassword (auth, email, password)
   } 
 
   const signIn = (email, password) => {
@@ -44,9 +45,10 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
 
-      
+    
       if(currentUser){
-        axios.post('https://musically-three.vercel.app/jwt', {email: currentUser.email})
+       // axios.post('https://musically-three.vercel.app/jwt', {email: currentUser.email})
+         axios.post('http://localhost:5000/jwt', {email: currentUser.email})
         .then(data => {
       
           localStorage.setItem('access-token', data.data.token)

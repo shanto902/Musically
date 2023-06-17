@@ -1,10 +1,10 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useAuthentication from "../../hooks/useAuthentication";
-import useSecureAxios from "../../hooks/useSecureAxios";
+import useAuthentication from "../../../hooks/useAuthentication";
+import useSecureAxios from "../../../hooks/useSecureAxios";
 import "./PaymentForm.css";
-import useSelectedClass from "../../hooks/useSelectedClass";
+import useSelectedClass from "../../../hooks/useSelectedClass";
 import Swal from "sweetalert2";
 
 const PaymentForm = () => {
@@ -25,12 +25,12 @@ const PaymentForm = () => {
 
   const price = matchedClass ? parseFloat(matchedClass.price) : 0;
 
-  console.log(price);
+  
 
   useEffect(() => {
     if (price > 0) {
       secureAxios.post("/create-payment-intent", { price }).then((res) => {
-        console.log(res.data.clientSecret);
+       
         setClientSecret(res.data.clientSecret);
       });
     }
@@ -54,11 +54,11 @@ const PaymentForm = () => {
     });
 
     if (error) {
-      console.log("error", error);
+     
       setCardError(error.message);
     } else {
       setCardError("");
-      // console.log('payment method', paymentMethod)
+ 
     }
 
     setProcessing(true);
@@ -75,10 +75,10 @@ const PaymentForm = () => {
       });
 
     if (confirmError) {
-      console.log(confirmError);
+      console.error(confirmError);
     }
 
-    console.log("payment intent", paymentIntent);
+    
     setProcessing(false);
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
@@ -89,14 +89,15 @@ const PaymentForm = () => {
         price,
         date: new Date(),
         status: "purchased",
-        itemName: matchedClass.nameOfClass,
-        itemId: matchedClass._id,
+        itemName: matchedClass.name,
+        classId: matchedClass.classId,
+        selectedClassId: matchedClass._id
       };
+      console.error(payment)
       secureAxios.post("/payments", payment).then((res) => {
-        console.log(res.data.insertResult.insertedId );
         if (res.data.insertResult.insertedId) {
           Swal.fire({
-            position: 'top-end',
+            position: 'top-end', 
             icon: 'success',
             title: 'Payment Completed',
             showConfirmButton: false,
@@ -105,6 +106,8 @@ const PaymentForm = () => {
           navigate('/dashboard/selected-class')
         }
       });
+
+
     }
   };
 

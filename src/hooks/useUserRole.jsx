@@ -10,11 +10,14 @@ const useUserRole = (email) => {
 
   const fetchUserRole = async () => {
     const response = await secureAxios.get(`/user/role/${user?.email}`);
-    const { role } = response.data;
-    return role === 'student';
+    const { role, purchasedItems } = response.data;
+    return {
+      isStudent: role === 'student',
+      purchasedItems: purchasedItems || [],
+    };
   };
 
-  const { data: isStudent, isLoading, refetch } = useQuery(['userRole', email], fetchUserRole, {
+  const { data: userData, isLoading, refetch } = useQuery(['userRole', email], fetchUserRole, {
     enabled: !!email,
   });
 
@@ -22,9 +25,11 @@ const useUserRole = (email) => {
     refetch();
   }, [email, refetch]);
 
-  console.log("isLoading",isLoading, "isStudent",isStudent)
+  const { isStudent, purchasedItems } = userData || {};
 
-  return [isStudent, isLoading];
+
+
+  return [isStudent, purchasedItems, isLoading];
 };
 
 export default useUserRole;

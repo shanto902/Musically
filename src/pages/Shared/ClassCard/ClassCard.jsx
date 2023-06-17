@@ -12,8 +12,9 @@ const ClassCard = ({ classItem }) => {
   const { user } = useAuthentication();
   const [secureAxios] = useSecureAxios();
   const [hover, setHover] = useState(false);
-  const [isStudent, isLoading] = useUserRole();
+  const [isStudent,purchasedItems, isLoading] = useUserRole();
 
+  
   const navigate = useNavigate();
 
   const handleBuy = async (classItem) => {
@@ -55,10 +56,29 @@ const ClassCard = ({ classItem }) => {
       price: classItem.price,
       seats: classItem.availableSeats,
     };
+  
+    // Check if the class has already been purchased
+    const alreadyPurchased = purchasedItems.some(
+      (item) => item === classItem._id
+    );
 
+   
+
+
+    
+    if (alreadyPurchased) {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Already enrolled in this class",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
     try {
       const res = await secureAxios.post("/classes/select", selectedClass);
-      console.log(res.data);
+   
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",
@@ -144,7 +164,11 @@ const ClassCard = ({ classItem }) => {
               }`}
             >
               <button
-                className={`absolute px-7 ${classItem.availableSeats === 0 ? "text-white" : "bg-[#C03C6C] text-white hover:text-black p-2 rounded-xl drop-shadow-lg hover:bg-gray-200"} transition duration-300 ease-in-out ${
+                className={`absolute px-7 ${
+                  classItem.availableSeats === 0
+                    ? "text-white"
+                    : "bg-[#C03C6C] text-white hover:text-black p-2 rounded-xl drop-shadow-lg hover:bg-gray-200"
+                } transition duration-300 ease-in-out ${
                   !hover ? "hidden" : ""
                 }`}
                 disabled={isLoading || classItem.availableSeats === 0}

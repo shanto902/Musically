@@ -8,8 +8,9 @@ const useAllClasses = () => {
     queryKey: ['allClasses'],
     queryFn: async () => {
       const res = await secureAxios.get(`/all-classes`);
-      console.log(res.data);
+    
       return res.data;
+      
     }
   });
   return [allClasses, isClassLoading, refetch];

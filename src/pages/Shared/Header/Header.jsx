@@ -11,10 +11,10 @@ const Header = () => {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        console.log("user logged out");
+       
         
       })
-      .catch((error) => console.log(error));
+     
   };
 
   const menuLinks = (

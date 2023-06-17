@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import masking from "../../../assets/Rectangle.svg";
+
 import wave from "../../../assets/wave.png";
 
 import { useState } from "react";
 
 const InstructorCard = ({ instructor }) => {
   const [hover, setHover] = useState(false);
-  const navigate = useNavigate();
   return (
     <>
       <div
@@ -14,7 +12,14 @@ const InstructorCard = ({ instructor }) => {
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <img className="absolute inset-x-0 shadow-xl bg-white w-/4 md:w-3/5 mx-auto mt-2 rounded-full border-4 border-white " src={instructor.picture} alt=""  />
+        
+        <img
+  className="absolute inset-x-0 shadow-xl bg-white mx-auto mt-2 rounded-full border-4 border-white"
+  src={instructor.picture}
+  alt=""
+  style={{ height: '150px', width: '150px', objectFit: 'cover' }}
+/>
+
     
         <img
           className="absolute self-end z-20 rounded-b-[30px]"
@@ -32,9 +37,9 @@ const InstructorCard = ({ instructor }) => {
           <p className={`text-center ${hover ? "hidden" : ""}`}>
             Email: {instructor.email}
           </p>
-          <p className={`text-center ${hover ? "hidden" : ""}`}>
+          {/* <p className={`text-center ${hover ? "hidden" : ""}`}>
             Total Classes: {instructor.availableSeats}
-          </p>
+          </p> */}
         
         </div>
         <div

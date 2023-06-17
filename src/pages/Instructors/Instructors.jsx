@@ -9,7 +9,7 @@ const Instructors = () => {
   return (
     <>
       <Helmet>
-        <title>Instructors | Vista Vocal</title>
+        <title>Instructors | Musically</title>
       </Helmet>
     
    <Banner url={'https://i.ibb.co/PTHvjzP/instructor-Bg-Img.jpg'} title={"Meet Our Awesome Instructors"}/>

@@ -26,7 +26,7 @@ const StudentTestimonials = () => {
       
       <div className=" flex justify-center items-center w-full">
         <Swiper
-          slidesPerView={3}
+          slidesPerView={3 }
           spaceBetween={20}
           breakpoints={{
             640: {

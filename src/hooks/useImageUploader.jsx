@@ -7,7 +7,7 @@ const useImageUploader = () => {
   const [uploading, setUploading] = useState(false);
 
   const uploadImage = async (imageFile) => {
-    console.log("Image Token:", imageToken);
+
     try {
       setUploading(true);
       const formData = new FormData();
@@ -17,7 +17,7 @@ const useImageUploader = () => {
         formData
       );
       if (response.data && response.data.data && response.data.data.url) {
-        console.log(response.data.data.url);
+    
         setUploadedImage(response.data.data.url);
       }
     } catch (error) {
